@@ -48,14 +48,14 @@
                                         @endif
                                         <div class="input-group input-group-outline mt-3">
                                             <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{ old('name') }}">
+                                            <input type="email" class="form-control" name="email" value="{{ 'admin@material.com' }}">
                                         </div>
                                         @error('email')
                                         <p class='text-danger inputerror'>{{ $message }} </p>
                                         @enderror
                                         <div class="input-group input-group-outline mt-3">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password" value="{{ old('password')}}">
+                                            <input type="password" class="form-control" name="password" value='{{ 'secret'}}'>
                                         </div>
                                         @error('password')
                                         <p class='text-danger inputerror'>{{ $message }} </p>
@@ -71,7 +71,7 @@
                                         </div>
                                         <p class="mt-4 text-sm text-center">
                                             Don't have an account?
-                                            <a href="{{ route('register) }}"
+                                            <a href="{{ route('register') }}"
                                                 class="text-primary text-gradient font-weight-bold">Sign up</a>
                                         </p>
                                         <!-- <p class="text-sm text-center">
