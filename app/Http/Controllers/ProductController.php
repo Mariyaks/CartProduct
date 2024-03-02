@@ -117,49 +117,5 @@ class ProductController extends Controller
         // Redirect to the product list with a success message
         return redirect()->route('productlist')->with('success', 'Product updated successfully');
     }
-
     
-       
-
-
-
-
-    public function addToCart($productId)
-    {
-        // Get product details based on $productId
-        $product = Product::find($productId);
-    
-        if (!$product) {
-            return response()->json(['error' => 'Product not found'], 404);
-        }
-    
-        // Create or get the cart array from the session
-        $cart = session()->get('cart', []);
-    
-        // Check if the product is already in the cart
-        $existingProduct = $cart[$productId] ?? null;
-    
-        if ($existingProduct) {
-            $existingProduct['quantity'] += 1;
-        } else {
-            // Add the product to the cart
-            $cart[$productId] = [
-                'id' => $productId,
-                'name' => $product->name,
-                'quantity' => 1,
-            ];
-        }
-    
-        // Update the cart array in the session
-        session()->put('cart', $cart);
-    
-        // You can customize the response based on your needs
-        // return response()->json(['success' => 'Product added to cart successfully']);
-        // return redirect()->route('addToCart', ['id' => $productId])->with('success', 'Product added to cart successfully');
-
-    }
-
-   
-    
-
 }
