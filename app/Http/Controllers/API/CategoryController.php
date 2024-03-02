@@ -24,7 +24,7 @@ class CategoryController extends Controller
     $products = $category->products;
 
     // Include information about the category and its products in the JSON response
-    return response()->json(['category' => $category, 'products' => $products], 200);
+    return response()->json(['category' => $category], 200);
 }
 }
 

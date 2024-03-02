@@ -49,9 +49,10 @@
                                         </div>
                                     </div>
                             @endif
-                            <form method='post' action="{{ route('update', ['id' => $product->id]) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('put') 
+                            <form action="{{ route('productupdate', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Name</label>
