@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/google-login', [App\Http\Controllers\AuthController::class, 'loginWithGoogleToken']);
+
+Route::get('/categories', [CategoryController::class, 'getCategory']); 
+Route::get('/categories/{categoryId}', [CategoryController::class, 'getProductById']);
