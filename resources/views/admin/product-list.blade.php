@@ -110,16 +110,20 @@
                                             
                                             <td class="align-middle">
                                             <a rel="tooltip" class="btn btn-success btn-link" 
-                                                href="{{ route('cartadd', ['productId' => $product->id]) }}" 
-                                                data-original-title="Add To Cart" title="Add To Cart">
+                                            href="{{ route('cartadd', ['productId' => $product->id]) }}">
                                                 <i class="material-icons">add_shopping_cart</i>
                                                 <div class="ripple-container"></div>
                                                 </a>
-                                                <a href="{{ route('sendCartToWhatsApp') }}" class="btn btn-primary">Send Cart to WhatsApp</a>
-
-                
+                                                <a href="{{ route('sendCartToWhatsApp') }}" class="btn btn-primary">
+                                                            <i class="material-icons">send</i> <!-- WhatsApp icon -->
+                                                            
+                                                        </a>
+                                                    </td>                                            </td>
+                                            <td class="align-middle">
+                                                <a href="{{ route('productdelete', ['id' => $product->id]) }}" class="btn btn-danger btn-link">
+                                                <i class="material-icons">delete</i>
+                                                </a>
                                             </td>
-                                            
                                         </tr>
                                         @endforeach
                                     </tbody>

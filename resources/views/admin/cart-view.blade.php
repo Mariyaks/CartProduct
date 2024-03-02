@@ -25,29 +25,28 @@
                         </div>
                     </div>
                     <div class="card-body p-3">
-                            <form method="post" action="">
-                                @csrf
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Product Id</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <form method="post" action="">
+                            @csrf
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Id</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($cartItems as $cartItem)
-                                        <tr>
-                                            <td>{{ $cartItem->id }}</td>
-                                            <td>{{ $cartItem->name }}</td>
-                                            <td>{{ $cartItem->description }}</td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{ $cartItem->id }}</td>
+                                        <td>{{ $cartItem->name }}</td>
+                                        <td>{{ $cartItem->description }}</td>
+                                    </tr>
                                     @endforeach
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
-                            </form>
-                        
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+                        </form>
                     </div>
                 </div>
             </div>

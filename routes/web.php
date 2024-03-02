@@ -27,12 +27,15 @@ Route::get('/', function () {return redirect('login');})->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Product
 Route::get('/products', [ProductController::class, 'ProductShow'])->name('products');
 Route::post('/admin/productadd', [ProductController::class, 'ProductAdd'])->name('productadd');
 Route::get('/productlist', [ProductController::class, 'ProductList'])->name('productlist');
 Route::get('/productedit/{id}', [ProductController::class, 'ProductEdit'])->name('productedit');
-Route::put('/update/{id}', [ProductController::class, 'ProductUpdate'])->name('update');
+Route::put('/productupdate/{id}', [ProductController::class, 'ProductUpdate'])->name('productupdate');
+Route::get('/product/delete/{id}', [ProductController::class,'ProductDelete'])->name('productdelete');
 
+//Category
 Route::get('/category', [CategoryController::class, 'CategoryShow'])->name('category');
 Route::get('/categorylist', [CategoryController::class, 'CategoryList'])->name('categorylist');
 Route::post('/admin/categoryadd', [CategoryController::class, 'CategoryAdd'])->name('categoryadd');
@@ -40,7 +43,7 @@ Route::get('/categoryedit/{id}', [CategoryController::class, 'CategoryEdit'])->n
 Route::put('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('update');
 Route::get('/delete/{id}', [CategoryController::class, 'CategroyDelete'])->name('delete');
 
-Route::get('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cartadd');
-// Route::get('/addcart', [CartController::class, 'addToCart'])->name('addcart');
-
+//AddToCart
+Route::get('/cart/add/{productId}', [CartController::class, 'addTocart'])->name('cartadd');
 Route::get('/send-cart-to-whatsapp', [CartController::class,'sendCartToWhatsApp'])->name('sendCartToWhatsApp');
+// Route::get('/cart/view', [CartController::class, 'viewCart'])->name('viewcart');

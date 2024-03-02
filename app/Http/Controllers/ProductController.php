@@ -83,39 +83,53 @@ class ProductController extends Controller
     }
 
     public function ProductUpdate(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|exists:categories,id',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'category' => 'required|exists:categories,id',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        'description' => 'required|string',
+    ]);
 
-        // Find the existing product
-        $product = Product::findOrFail($id);
+    // Find the existing product
+    $product = Product::findOrFail($id);
 
-        // Update product properties based on form inputs
-        $product->name = $request->input('name');
-        $product->category_id = $request->input('category');
-        $product->description = $request->input('description');
+    // Update product properties based on form inputs
+    $product->name = $request->input('name');
+    $product->category_id = $request->input('category');
+    $product->description = $request->input('description');
 
-        // Check if a new image is provided
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            
-            // Move the uploaded image to the 'uploads' directory
-            $image->move(public_path('uploads'), $imageName);
-            
-            // Update the product's image path in the database
-            $product->image = 'uploads/' . $imageName;
+    // Check if a new image is provided
+    if ($request->hasFile('image')) {
+        // Delete the old image if it exists
+        if ($product->image) {
+            unlink(public_path($product->image));
         }
 
-        // Save the changes to the database
-        $product->save();
-
-        // Redirect to the product list with a success message
-        return redirect()->route('productlist')->with('success', 'Product updated successfully');
+        // Upload and store the new image
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads'), $imageName);
+        $product->image = 'uploads/' . $imageName;
     }
+
+    // Save the changes to the database
+    $product->save();
+
+    // Redirect to the product list with a success message
+    return redirect()->route('productlist')->with('success', 'Product updated successfully');
+}
+
     
+    public function ProductDelete($id)
+{
+    // Find the product by ID
+    $product = Product::findOrFail($id);
+
+    // Delete the product
+    $product->delete();
+
+    // Redirect back to the product list with a success message
+    return redirect()->route('productlist')->with('success', 'Product deleted successfully');
+}
 }
