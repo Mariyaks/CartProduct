@@ -13,28 +13,29 @@ class CartController extends Controller
     
 
     public function addToCart($productId)
-{
-    $product = Product::find($productId);
+    {
+        $product = Product::find($productId);
 
-    if (!$product) {
-        return redirect()->route('productlist')->with('error', 'Product not found.');
+        if (!$product) {
+            return redirect()->route('productlist')->with('error', 'Product not found.');
+        }
+
+        // Add the product to the cart
+        $cartItems = session()->get('cartItems', []);
+        $cartItems[] = $product;
+        session(['cartItems' => $cartItems]);
+
+        return redirect()->route('productlist')->with('status', 'Product added to the cart.');
     }
 
-    // Add the product to the cart
-    $cartItems = session()->get('cartItems', []);
-    $cartItems[] = $product;
-    session(['cartItems' => $cartItems]);
-
-    return redirect()->route('productlist')->with('status', 'Product added to the cart.');
-}
-
-
-public function viewCart()
+    public function viewCart()
 {
     $cartItems = session()->get('cartItems', []);
+    $productsInCart = Product::whereIn('id', $cartItems)->get();
 
-    return view('admin.cart-view', compact('cartItems'));
+    return view('admin.cart-view', compact('productsInCart'));
 }
+    
     public function sendCartToWhatsApp()
     {
         $cartItems = session()->get('cartItems', []);
@@ -76,6 +77,11 @@ public function viewCart()
         }
     }
     
+
+  
+
+
+
 
 
     
