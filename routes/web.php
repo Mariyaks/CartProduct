@@ -44,6 +44,6 @@ Route::put('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name(
 Route::get('/delete/{id}', [CategoryController::class, 'CategroyDelete'])->name('delete');
 
 //AddToCart
-Route::get('/cart/add/{productId}', [CartController::class, 'addTocart'])->name('cartadd');
+Route::get('/cart/add/{productId}', [CartController::class, 'ViewCart'])->name('cartadd');
 Route::get('/send-cart-to-whatsapp', [CartController::class,'sendCartToWhatsApp'])->name('sendCartToWhatsApp');
-// Route::get('/cart/view', [CartController::class, 'viewCart'])->name('viewcart');
+Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cartadd');

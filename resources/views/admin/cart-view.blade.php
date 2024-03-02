@@ -1,5 +1,3 @@
-<!-- resources/views/cart-view.blade.php -->
-
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.sidebar activePage="admin.directory-add"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
@@ -28,23 +26,33 @@
                         <form method="post" action="">
                             @csrf
                             <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Product Id</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($cartItems as $cartItem)
-                                    <tr>
-                                        <td>{{ $cartItem->id }}</td>
-                                        <td>{{ $cartItem->name }}</td>
-                                        <td>{{ $cartItem->description }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($productsInCart as $product)
+            <tr>
+                <td>{{ $product->id }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->description }}</td>
+                <td>
+                    <form action="{{ route('cartadd', ['productId' => $product->id]) }}" method="post">
+                        @csrf
+                        <a href="#" onclick="this.closest('form').submit(); return false;" class="btn btn-success">
+                            Add to Cart
+                        </a>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
                             <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
                         </form>
                     </div>

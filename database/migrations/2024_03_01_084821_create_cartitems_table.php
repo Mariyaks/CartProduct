@@ -12,12 +12,9 @@ class CreateCartItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->integer('quantity');
-            // Add other columns as needed
-
+            $table->integer('quantity')->default(1);
             $table->timestamps();
 
-            // Define foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
